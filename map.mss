@@ -1,4 +1,5 @@
 @land: #f8f7ed;
+@water: #e0f3f8;
 
 Map {
   buffer-size: 384;
