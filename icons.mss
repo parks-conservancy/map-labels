@@ -48,11 +48,11 @@
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
       shield-min-distance: 5;
-      shield-min-padding: 5;
+      shield-min-padding: 15;
       shield-file: url("images/campground_28x14px.svg");
       shield-unlock-image: true;
       shield-size: 11;
-      //shield-horizontal-alignment: left;
+      shield-avoid-edges: true;
     }
     
     [zoom>=16] {
