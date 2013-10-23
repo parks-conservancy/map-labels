@@ -37,6 +37,7 @@ Map {
   text-name: [trail_name];
   text-face-name: "Frutiger LT 45 Light Bold";
   text-placement: line;
+  text-avoid-edges: true;
 }
 
 #dual-carriageways {
