@@ -1,7 +1,7 @@
 #locations {
   [type='Cafe'] {
     [zoom=15] {
-      point-file: url("images/cafe_14x14px.png");
+      point-file: url("images/cafe_16x16px.svg");
     }
 
     [zoom>=16] {
@@ -15,11 +15,11 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/cafe_32x16px.png");
+      shield-file: url("images/cafe_36x18px.svg");
       shield-unlock-image: true;
       shield-size: 12;
 
-      point-file: url("images/cafe_16x16px.png");
+      point-file: url("images/cafe_18x18px.svg");
     }
     
     [zoom>=17] {
@@ -34,13 +34,14 @@
 
   [type='Campground'] {
     [zoom=14] {
-      point-file: url("images/campground_14x14px.png");
+      marker-file: url("images/campground_14x14px.svg");
     }
 
     [zoom>=15] {
       shield-fill: #333;
       shield-halo-fill: @land;
       shield-halo-radius: 2;
+      //shield-text-dx: 55.1;
       shield-text-dx: 0.1;
       shield-text-dy: -12;
       shield-wrap-width: 32;
@@ -48,17 +49,18 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/campground_28x14px.png");
+      shield-file: url("images/campground_28x14px.svg");
       shield-unlock-image: true;
       shield-size: 11;
+      //shield-horizontal-alignment: left;
     }
     
     [zoom>=16] {
-      shield-file: url("images/campground_32x16px.png");
+      shield-file: url("images/campground_32x16px.svg");
       shield-face-name: "Frutiger LT 45 Light Bold";
       shield-size: 12;
       
-      point-file: url("images/campground_16x16px.png");
+      point-file: url("images/campground_16x16px.svg");
     }
     
     [zoom>=17] {
@@ -69,7 +71,7 @@
 
   [type='Overlook'] {
     [zoom=14] {
-      point-file: url("images/overlook_12x12px.png");
+      point-file: url("images/overlook_14x14px.svg");
     }
 
     [zoom>=15] {
@@ -83,19 +85,19 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/overlook_28x14px.png");
+      shield-file: url("images/overlook_32x16px.svg");
       shield-unlock-image: true;
       shield-size: 11;
 
-      point-file: url("images/overlook_14x14px.png");
+      point-file: url("images/overlook_16x16px.svg");
     }
     
     [zoom>=16] {
       shield-size: 12;
       shield-face-name: "Frutiger LT 45 Light Bold";
-      shield-file: url("images/overlook_32x16px.png");
+      shield-file: url("images/overlook_36x18px.svg");
       
-      point-file: url("images/overlook_16x16px.png");
+      point-file: url("images/overlook_18x18px.svg");
     }
     
     [zoom>=17] {
@@ -105,25 +107,21 @@
   }
   [type='Parking Lot'] {
     [zoom>=16] {
-      point-file: url("images/parkinglot_11x11px3.png");
-    }
-    
-    [zoom>=17] {
-      point-file: url("images/parkinglot_14x14px.png");
+      point-file: url("images/parkinglot_14x14px.svg");
     }
     
     [zoom>=18] {
-      point-file: url("images/parkinglot_16x16px.png");
+      point-file: url("images/parkinglot_16x16px.svg");
     }
   }
 
   [type='Restroom'] {
     [zoom>=15] {
-      point-file: url("images/restroom_14x14px.png");
+      point-file: url("images/restroom_16x16px.svg");
     }
     
     [zoom>=16] {
-      point-file: url("images/restroom_16x16px.png");
+      point-file: url("images/restroom_18x18px.svg");
     }
   }
 
@@ -151,6 +149,7 @@
       text-min-padding: 0;
       text-min-distance: 0;
       text-wrap-width: 48;
+      text-avoid-edges: true;
 
       text-size: 11;
       text-placement-type: simple;
@@ -171,12 +170,12 @@
   }
 
   [type='Trailhead'] {
-    [zoom>=13] {
-      point-file: url("images/trailhead_12x12px2.png");
+    [zoom>=14] {
+      point-file: url("images/trailhead_14x14px.svg");
     }
     
     [zoom>=15] {
-      point-file: url("images/trailhead_14x14px.png");
+      point-file: url("images/trailhead_16x16px.svg");
     }
     
     [zoom>=16] {
@@ -191,11 +190,11 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/trailhead_32x16px.png");
+      shield-file: url("images/trailhead_36x18px.svg");
       shield-unlock-image: true;
       shield-size: 12;
 
-      point-file: url("images/trailhead_32x16px.png");
+      point-file: url("images/trailhead_36x18px.svg");
     }
     
     [zoom>=17] {
@@ -208,7 +207,7 @@
 
   [type='Water Fountain'] {
     [zoom>=16] {
-      point-file: url("images/waterfountain_16x16px.png");
+      point-file: url("images/waterfountain_18x18px.svg");
     }
   }
 
@@ -224,19 +223,19 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/visitors_28x14px.png");
+      shield-file: url("images/visitors_28x14px.svg");
       shield-unlock-image: true;
       shield-size: 11;
 
-      point-file: url("images/visitors_14x14px.png");
+      point-file: url("images/visitors_14x14px.svg");
     }
     
     [zoom>=16] {
       shield-size: 12;
       shield-face-name: "Frutiger LT 45 Light Bold";
-      shield-file: url("images/visitors_32x16px.png");
+      shield-file: url("images/visitors_32x16px.svg");
       
-      point-file: url("images/visitors_16x16px.png");
+      point-file: url("images/visitors_16x16px.svg");
     }
     
     [zoom>=17] {
