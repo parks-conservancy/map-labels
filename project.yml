@@ -153,6 +153,7 @@ Layer:
   #       ) AS x
 
   # ---- GGNPC Locations -----------------------------------------------
+  # note: ogc_fid may not be unique when unioned with other tables
 
   - <<: *layer
     name: locations
@@ -166,12 +167,11 @@ Layer:
       table: >
         (
           SELECT * FROM (
-            SELECT name, type, geom,
+            SELECT ogc_fid as id, name, type, geom, 
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
               WHEN type = 'Trailhead' THEN 3
-              WHEN type = 'Site of Interest' THEN 4
               WHEN type = 'Cafe' THEN 5
               WHEN type = 'Overlook' THEN 6
               WHEN type = 'Campground' THEN 8
@@ -181,7 +181,7 @@ Layer:
               WHEN type = 'Restroom' THEN 10
               WHEN type = 'Parking Lot' THEN 11
               WHEN type = 'Restoration Site' THEN 12
-              WHEN type = 'Access' THEN 13
+              WHEN type = 'Site of Interest' THEN 13
               WHEN type = 'Building' THEN 14
               WHEN type = 'Water Fountain' THEN 15
               WHEN type = 'Bike Rack' THEN 16
@@ -190,9 +190,10 @@ Layer:
             FROM locations
             WHERE geom && !bbox!
               AND type NOT IN ('Park')
-              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot')
+              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot', 'Building')
           UNION
-            SELECT name,
+            SELECT ogc_fid as id,
+              name,
               type,
               geom,
               10 AS priority
@@ -200,14 +201,15 @@ Layer:
             WHERE geom && !bbox!
               AND type = 'Restroom'
           UNION
-            SELECT regexp_replace(name, '(\s-|:)\s+', E'\n') AS name,
+            SELECT id,
+              regexp_replace(name, '(\s-|:)\s+', E'\n') AS name,
               'Trailhead' AS type,
               geom,
               3 AS priority
             FROM trailheads
             WHERE geom && !bbox!
           ) AS _
-          ORDER BY priority
+          ORDER BY priority, id
         ) AS x
 
   # ---- Trail Labels --------------------------------------------------
