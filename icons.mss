@@ -189,7 +189,7 @@
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
       shield-min-distance: 5;
-      shield-min-padding: 5;
+      shield-min-padding: 15;
       shield-file: url("images/trailhead_36x18px_buffer.svg");
       shield-unlock-image: true;
       shield-size: 12;
