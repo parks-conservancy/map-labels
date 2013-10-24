@@ -191,7 +191,7 @@ Layer:
             FROM locations
             WHERE geom && !bbox!
               AND type NOT IN ('Park')
-              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot', 'Building')
+              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Building')
           UNION
             SELECT ogc_fid as id,
               name,
@@ -208,6 +208,14 @@ Layer:
               geom,
               3 AS priority
             FROM trailheads
+            WHERE geom && !bbox!
+          UNION
+            SELECT id::integer,
+              title AS name,
+              'Parking Lot' AS type,
+              geom,
+              11 AS priority
+            FROM parking_lots
             WHERE geom && !bbox!
           ) AS _
           ORDER BY priority, id
