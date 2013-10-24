@@ -6,7 +6,7 @@ attribution:      'Map Data © OpenStreetMap'
 bounds:           [-123.640, 36.791, -121.025, 38.719]
 center:           [-122.5369, 37.8704, 13]
 format:           png
-interactivity:    false
+interactivity:    { "layer": "locations", "fields": [ "id" ], "template_full": "{{{id}}} {{{name}}}" }
 minzoom:          10
 maxzoom:          20
 srs:              '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
@@ -163,6 +163,7 @@ Layer:
       minzoom: 14
     Datasource:
       <<: *postgis
+      key_field: id
       geometry_field: geom
       table: >
         (
