@@ -209,17 +209,29 @@ Layer:
               3 AS priority
             FROM trailheads
             WHERE geom && !bbox!
-          UNION
-            SELECT id::integer,
-              title AS name,
-              'Parking Lot' AS type,
-              geom,
-              11 AS priority
-            FROM parking_lots
-            WHERE geom && !bbox!
           ) AS _
           ORDER BY priority, id
         ) AS x
+
+  # ---- Parking Locations ---------------------------------------------
+
+  - <<: *layer
+    name: parking-locations
+    id:   parking-locations
+    status: on
+    properties:
+      minzoom: 16
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT DISTINCT ON (snapped) snapped, geom FROM (
+            SELECT geom, ST_SnapToGrid(geom, !pixel_width! * 96, !pixel_height! * 96) snapped
+            FROM parking_lots
+            WHERE geom && ST_Expand(!bbox!, -1 * !pixel_width! * 24) -- shrink the bbox by the buffer size (approximately)
+          ) AS _
+        ) AS _
 
   # ---- Trail Labels --------------------------------------------------
 

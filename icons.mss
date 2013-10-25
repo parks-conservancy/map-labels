@@ -246,3 +246,10 @@
   }
 }
 
+#parking-locations {
+  marker-file: url("images/parkinglot_14x14px_buffer.svg");
+
+  [zoom>=18] {
+    marker-file: url("images/parkinglot_16x16px_buffer.svg");
+  }
+}
