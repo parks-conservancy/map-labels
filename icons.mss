@@ -9,7 +9,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 0.1;
-      shield-text-dy: -12;
+      shield-text-dy: -14;
       shield-wrap-width: 48;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
@@ -82,7 +82,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 0.1;
-      shield-text-dy: -12;
+      shield-text-dy: -14;
       shield-wrap-width: 40;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
@@ -186,7 +186,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 0.1;
-      shield-text-dy: -12;
+      shield-text-dy: -14;
       shield-wrap-width: 80;
       shield-line-spacing: -2;
       shield-face-name: "Frutiger LT 55 Roman Regular";
@@ -220,7 +220,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 1;
-      shield-text-dy: -12;
+      shield-text-dy: -14;
       shield-wrap-width: 40;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
