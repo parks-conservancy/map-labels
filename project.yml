@@ -168,7 +168,7 @@ Layer:
       table: >
         (
           SELECT * FROM (
-            SELECT ogc_fid as id, name, type, geom, filename, CAST(NULL AS int) AS tnt_id,
+            SELECT ogc_fid as id, name, type, geom, filename,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -198,18 +198,16 @@ Layer:
               type,
               geom,
               filename,
-              CAST(NULL AS int) AS tnt_id,
               10 AS priority
             FROM ggnra_restrooms
             WHERE geom && !bbox!
               AND type = 'Restroom'
           UNION
-            SELECT id,
-              regexp_replace(name, '(\s-|:)\s+', E'\n') AS name,
+            SELECT ogc_fid as id,
+              name,
               'Trailhead' AS type,
               geom,
               NULL AS filename,
-              tnt_id,
               3 AS priority
             FROM trailheads
             WHERE geom && !bbox!
