@@ -145,6 +145,22 @@
       text-size: 11;
     }
   }
+  [zoom>=17] {
+    [oneway='yes'],[oneway='-1'] {
+      marker-width:15;
+      marker-placement:line;
+      marker-file:url("shape://arrow");
+      marker-line-width:1;
+      marker-line-opacity:0.5;
+      marker-line-color:#fff;
+      marker-spacing: 300;
+      marker-fill:#5a5c5b;
+      marker-opacity:0.5;
+    }
+    [oneway='-1'] {
+      marker-transform:rotate(180,0,0);
+    }
+  }
 }
 
 .places
