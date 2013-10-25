@@ -6,8 +6,10 @@
   text-opacity: 0.9;
   text-size: 9;
   text-min-distance: 10;
-  // text-min-padding: 15;
+  text-min-padding: 25;
   text-wrap-width: 32;
+  text-avoid-edges: true;
+  text-align: center;
 
   text-placement-type: simple;
   text-placements: "X,S,W,N,E,SW,NE,SE,NE";
