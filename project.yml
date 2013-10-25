@@ -550,6 +550,7 @@ Layer:
       table: >
         (
           SELECT tags -> 'highway' AS highway,
+            tags -> 'oneway' AS oneway,
             (string_to_array(tags -> 'name', ';'))[1] AS name,
             way,
             (CASE
