@@ -2,7 +2,7 @@
 @water: #e0f3f8;
 
 Map {
-  buffer-size: 18;
+  buffer-size: 22;
   font-directory: url("fonts/");
 }
 
