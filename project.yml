@@ -6,7 +6,7 @@ attribution:      'Map Data © OpenStreetMap'
 bounds:           [-123.640, 36.791, -121.025, 38.719]
 center:           [-122.5369, 37.8704, 13]
 format:           png
-interactivity:    { "layer": "locations", "fields": [ "id" ], "template_full": "{{{id}}} {{{name}}}" }
+interactivity:    { "layer": "locations", "fields": [ "id" ], "template_full": "{{{id}}} {{{name}}} {{{filename}}} {{{tnt_id}}}" }
 minzoom:          10
 maxzoom:          20
 srs:              '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
@@ -168,7 +168,7 @@ Layer:
       table: >
         (
           SELECT * FROM (
-            SELECT ogc_fid as id, name, type, geom, 
+            SELECT ogc_fid as id, name, type, geom, filename, CAST(NULL AS int) AS tnt_id,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -197,6 +197,8 @@ Layer:
               name,
               type,
               geom,
+              filename,
+              CAST(NULL AS int) AS tnt_id,
               10 AS priority
             FROM ggnra_restrooms
             WHERE geom && !bbox!
@@ -206,6 +208,8 @@ Layer:
               regexp_replace(name, '(\s-|:)\s+', E'\n') AS name,
               'Trailhead' AS type,
               geom,
+              NULL AS filename,
+              tnt_id,
               3 AS priority
             FROM trailheads
             WHERE geom && !bbox!
