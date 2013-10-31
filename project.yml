@@ -168,7 +168,7 @@ Layer:
       table: >
         (
           SELECT *, ST_X(ST_Transform(geom, 4326)) lng, ST_Y(ST_Transform(geom, 4326)) lat FROM (
-            SELECT ogc_fid as id, name, type, geom, filename,
+            SELECT ogc_fid as id, name, type, geom, filename, orientation,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -198,6 +198,7 @@ Layer:
               type,
               geom,
               filename,
+              NULL as orientation,
               10 AS priority
             FROM ggnra_restrooms
             WHERE geom && !bbox!
@@ -208,6 +209,7 @@ Layer:
               'Trailhead' AS type,
               geom,
               NULL AS filename,
+              NULL as orientation,
               3 AS priority
             FROM trailheads
             WHERE geom && !bbox!
