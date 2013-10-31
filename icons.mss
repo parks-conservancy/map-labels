@@ -210,7 +210,7 @@
 
   [type='Water Fountain'] {
     [zoom>=16] {
-      marker-file: url("images/waterfountain_18x18px.svg");
+      marker-file: url("images/waterdrop_18x18px_simple_buffer.svg");
     }
   }
 
