@@ -204,7 +204,7 @@ Layer:
             WHERE geom && !bbox!
               AND type = 'Restroom'
           UNION
-            SELECT id,
+            SELECT id::integer id,
               name,
               'Trailhead' AS type,
               geom,
