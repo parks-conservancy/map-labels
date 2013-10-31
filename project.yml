@@ -107,7 +107,7 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT name, geom
+          SELECT name, geom, label_hint
           FROM locations
           WHERE geom && !bbox!
             AND type='Park'
