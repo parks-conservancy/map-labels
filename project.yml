@@ -204,7 +204,7 @@ Layer:
             WHERE geom && !bbox!
               AND type = 'Restroom'
           UNION
-            SELECT ogc_fid as id,
+            SELECT id,
               name,
               'Trailhead' AS type,
               geom,
