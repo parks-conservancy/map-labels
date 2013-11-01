@@ -6,7 +6,7 @@ attribution:      'Map Data © OpenStreetMap'
 bounds:           [-123.640, 36.791, -121.025, 38.719]
 center:           [-122.5369, 37.8704, 13]
 format:           png
-interactivity:    { "layer": "locations", "fields": [ "id", "filename", "type", "lat", "lng" ], "template_full": "{{{id}}} {{{name}}} {{{filename}}} {{{tnt_id}}}" }
+interactivity:    { "layer": "locations", "fields": [ "id", "filename", "type", "name", "description", "lat", "lng" ], "template_full": "{{{id}}} {{{name}}} {{{filename}}} {{{tnt_id}}}" }
 minzoom:          6
 maxzoom:          20
 srs:              '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
@@ -168,7 +168,13 @@ Layer:
       table: >
         (
           SELECT *, ST_X(geom_4326) lng, ST_Y(geom_4326) lat FROM (
-            SELECT ogc_fid as id, name, type, geom, filename, orientation,
+            SELECT ogc_fid as id,
+              name,
+              NULL AS description,
+              type,
+              geom,
+              filename,
+              orientation,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -196,6 +202,7 @@ Layer:
           UNION
             SELECT ogc_fid as id,
               name,
+              NULL AS description,
               type,
               geom,
               filename,
@@ -208,6 +215,7 @@ Layer:
           UNION
             SELECT id::integer id,
               name,
+              descriptio description,
               'Trailhead' AS type,
               geom,
               NULL AS filename,
