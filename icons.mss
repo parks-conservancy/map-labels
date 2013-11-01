@@ -58,6 +58,9 @@
 
       shield-file: url("images/campground_32x16px_buffer.svg");
       shield-dx: -8;
+
+      marker-file: url("images/campground_32x16px_buffer.svg");
+      marker-transform: "translate(-8)";
     }
     
     [zoom>=16] {
