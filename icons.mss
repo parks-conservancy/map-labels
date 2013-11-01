@@ -74,7 +74,17 @@
 
   [type='Overlook'] {
     [zoom=14] {
-      marker-file: url("images/overlook_14x14px_buffer.svg");
+      marker-file: url("images/overlook2_36x18px_invert_buffer.svg");
+      [orientation=15] { marker-file: url("images/overlook2_36x18px_invert_buffer_15.svg");}
+      [orientation=45] { marker-file: url("images/overlook2_36x18px_invert_buffer_45.svg");}
+      [orientation=150] { marker-file: url("images/overlook2_36x18px_invert_buffer_150.svg");}
+      [orientation=-30] { marker-file: url("images/overlook2_36x18px_invert_buffer_-30.svg");}
+      [orientation=-45] { marker-file: url("images/overlook2_36x18px_invert_buffer_-45.svg");}
+      [orientation=-60] { marker-file: url("images/overlook2_36x18px_invert_buffer_-60.svg");}
+      [orientation=-75] { marker-file: url("images/overlook2_36x18px_invert_buffer_-75.svg");}
+      [orientation=-90] { marker-file: url("images/overlook2_36x18px_invert_buffer_-90.svg");}
+      [orientation=-135] { marker-file: url("images/overlook2_36x18px_invert_buffer_-135.svg");}
+
     }
 
     [zoom>=15] {
@@ -88,19 +98,38 @@
       shield-name: [name];
       //shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/overlook_32x16px_buffer.svg");
+      shield-file: url("images/overlook2_36x18px_invert_buffer.svg");
       shield-unlock-image: true;
       shield-size: 11;
+      [orientation=15] { shield-file: url("images/overlook2_36x18px_invert_buffer_15.svg");}
+      [orientation=45] { shield-file: url("images/overlook2_36x18px_invert_buffer_45.svg");}
+      [orientation=150] { shield-file: url("images/overlook2_36x18px_invert_buffer_150.svg");}
+      [orientation=-30] { shield-file: url("images/overlook2_36x18px_invert_buffer_-30.svg");}
+      [orientation=-45] { shield-file: url("images/overlook2_36x18px_invert_buffer_-45.svg");}
+      [orientation=-60] { shield-file: url("images/overlook2_36x18px_invert_buffer_-60.svg");}
+      [orientation=-75] { shield-file: url("images/overlook2_36x18px_invert_buffer_-75.svg");}
+      [orientation=-90] { shield-file: url("images/overlook2_36x18px_invert_buffer_-90.svg");}
+      [orientation=-135] { shield-file: url("images/overlook2_36x18px_invert_buffer_-135.svg");}
 
-      marker-file: url("images/overlook_32x16px_buffer.svg");
+      marker-file: url("images/overlook2_36x18px_invert_buffer.svg");
+      [orientation=15] { marker-file: url("images/overlook2_36x18px_invert_buffer_15.svg");}
+      [orientation=45] { marker-file: url("images/overlook2_36x18px_invert_buffer_45.svg");}
+      [orientation=150] { marker-file: url("images/overlook2_36x18px_invert_buffer_150.svg");}
+      [orientation=-30] { marker-file: url("images/overlook2_36x18px_invert_buffer_-30.svg");}
+      [orientation=-45] { marker-file: url("images/overlook2_36x18px_invert_buffer_-45.svg");}
+      [orientation=-60] { marker-file: url("images/overlook2_36x18px_invert_buffer_-60.svg");}
+      [orientation=-75] { marker-file: url("images/overlook2_36x18px_invert_buffer_-75.svg");}
+      [orientation=-90] { marker-file: url("images/overlook2_36x18px_invert_buffer_-90.svg");}
+      [orientation=-135] { marker-file: url("images/overlook2_36x18px_invert_buffer_-135.svg");}
+
     }
     
     [zoom>=16] {
       shield-size: 12;
       shield-face-name: "Frutiger LT 45 Light Bold";
-      shield-file: url("images/overlook_36x18px_buffer.svg");
+      //shield-file: url("images/overlook2_36x18px_buffer.svg");
       
-      marker-file: url("images/overlook_36x18px_buffer.svg");
+      //marker-file: url("images/overlook2_36x18px_buffer.svg");
     }
     
     [zoom>=17] {
