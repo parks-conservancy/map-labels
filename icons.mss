@@ -16,10 +16,12 @@
       //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/cafe_36x18px_buffer.svg");
+      shield-dx: -9;
       shield-unlock-image: true;
       shield-size: 12;
 
       marker-file: url("images/cafe_36x18px_buffer.svg");
+      marker-transform: "translate(-9)";
     }
     
     [zoom>=17] {
@@ -55,15 +57,17 @@
       //shield-avoid-edges: true;
 
       shield-file: url("images/campground_32x16px_buffer.svg");
-
+      shield-dx: -8;
     }
     
     [zoom>=16] {
       shield-file: url("images/campground_36x18px_buffer.svg");
+      shield-dx: -9;
       shield-face-name: "Frutiger LT 45 Light Bold";
       shield-size: 12;
       
       marker-file: url("images/campground_36x18px_buffer.svg");
+      marker-transform: "translate(-9)";
     }
     
     [zoom>=17] {
@@ -99,6 +103,7 @@
       //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/overlook2_36x18px_invert_buffer.svg");
+      shield-dx: -9;
       shield-unlock-image: true;
       shield-size: 11;
       [orientation=15] { shield-file: url("images/overlook2_36x18px_invert_buffer_15.svg");}
@@ -122,6 +127,7 @@
       [orientation=-90] { marker-file: url("images/overlook2_36x18px_invert_buffer_-90.svg");}
       [orientation=-135] { marker-file: url("images/overlook2_36x18px_invert_buffer_-135.svg");}
 
+      marker-transform: "translate(-9)";
     }
     
     [zoom>=16] {
@@ -223,10 +229,12 @@
       //shield-min-distance: 5;
       shield-min-padding: 15;
       shield-file: url("images/trailhead_36x18px_buffer.svg");
+      shield-dx: -9;
       shield-unlock-image: true;
       shield-size: 12;
 
       marker-file: url("images/trailhead_36x18px_buffer.svg");
+      marker-transform: "translate(-9)";
     }
     
     [zoom>=17] {
@@ -256,18 +264,22 @@
       //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/visitors_28x14px_buffer.svg");
+      shield-dx: -7;
       shield-unlock-image: true;
       shield-size: 11;
 
       marker-file: url("images/visitors_28x14px_buffer.svg");
+      marker-transform: "translate(-7)";
     }
     
     [zoom>=16] {
       shield-size: 12;
       shield-face-name: "Frutiger LT 45 Light Bold";
       shield-file: url("images/visitors_32x16px_buffer.svg");
+      shield-dx: -8;
       
       marker-file: url("images/visitors_32x16px_buffer.svg");
+      marker-transform: "translate(-8)";
     }
     
     [zoom>=17] {
