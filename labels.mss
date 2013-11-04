@@ -5,7 +5,6 @@
   text-fill: #000;
   text-opacity: 0.9;
   text-size: 9;
-  text-min-distance: 10;
   text-wrap-width: 32;
   text-avoid-edges: true;
   text-align: center;
@@ -19,16 +18,10 @@
   text-dx: 5;
   text-dy: 5;
 
-  [zoom>=12] {
-    text-dx: 10;
-    text-dy: 10;
+  [zoom>=11] {
+    text-min-distance: 30;
+    text-wrap-width: 32;
     text-size: 11;
-    text-character-spacing: 1;
-  }
-
-  [zoom>=13] {
-    text-wrap-width: 48;
-    text-size: 14;
     text-character-spacing: 1;
     text-halo-fill: @land;
     text-halo-radius: 1;
@@ -36,8 +29,20 @@
     text-transform: uppercase;
   }
 
+  [zoom>=12] {
+    text-min-distance: 25;
+    text-wrap-width: 40;
+    text-size: 13;
+  }
+
+  [zoom>=13] {
+    text-min-distance: 15;
+    text-wrap-width: 48;
+    text-size: 14;
+  }
+
   [zoom>=14] {
-    text-face-name: "Frutiger LT 45 Light Bold";
+    text-min-distance: 10;
     text-character-spacing: 2;
     text-dx: 32;
     text-dy: 32;
@@ -176,7 +181,6 @@
   text-opacity: 0.9;
   text-size: 10;
   text-placement: interior;
-  // text-spacing: 0;
   text-label-position-tolerance: 5;
   text-min-distance: 15;
   text-avoid-edges: true;
@@ -200,7 +204,6 @@
   {
     text-face-name: "Frutiger LT 55 Roman Bold";
     text-size: 18;
-    text-wrap-width: 48;
     text-character-spacing: 3;
   }
 }
@@ -253,7 +256,6 @@
 .places[place='island']
 {
 }
-
 
 #bay,
 .places[place='islet'],
