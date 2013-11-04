@@ -13,7 +13,6 @@
       shield-wrap-width: 48;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
-      //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/cafe_36x18px_buffer.svg");
       shield-dx: -9;
@@ -43,18 +42,15 @@
       shield-fill: #333;
       shield-halo-fill: @land;
       shield-halo-radius: 2;
-      //shield-text-dx: 55.1;
       shield-text-dx: 0.1;
       shield-text-dy: -28;
       shield-wrap-width: 32;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
-      //shield-min-distance: 5;
       shield-min-padding: 15;
       shield-file: url("images/campground_32x16px_buffer.svg");
       shield-unlock-image: true;
       shield-size: 11;
-      //shield-avoid-edges: true;
 
       shield-file: url("images/campground_32x16px_buffer.svg");
       shield-dx: -8;
@@ -104,7 +100,6 @@
       shield-wrap-width: 40;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
-      //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/overlook2_36x18px_invert_buffer.svg");
       shield-dx: -9;
@@ -230,7 +225,6 @@
       shield-line-spacing: -2;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
-      //shield-min-distance: 5;
       shield-min-padding: 15;
       shield-file: url("images/trailhead_36x18px_buffer.svg");
       shield-dx: -9;
@@ -265,7 +259,6 @@
       shield-wrap-width: 40;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
-      //shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/visitors_28x14px_buffer.svg");
       shield-dx: -7;
