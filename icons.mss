@@ -52,7 +52,6 @@
       shield-unlock-image: true;
       shield-size: 11;
 
-      shield-file: url("images/campground_32x16px_buffer.svg");
       shield-dx: -8;
 
       marker-file: url("images/campground_32x16px_buffer.svg");
