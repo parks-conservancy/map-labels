@@ -92,6 +92,7 @@
       [orientation=-90] { marker-file: url("images/overlook2_36x18px_invert_buffer_-90.svg");}
       [orientation=-135] { marker-file: url("images/overlook2_36x18px_invert_buffer_-135.svg");}
 
+      marker-transform: "translate(-9)";
     }
 
     [zoom>=15] {
