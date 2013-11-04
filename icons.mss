@@ -95,7 +95,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 0.1;
-      shield-text-dy: -14;
+      shield-text-dy: -13;
       shield-wrap-width: 40;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
@@ -161,7 +161,8 @@
     }
   }
 
-  [type='Site of Interest'],[type='Building'] {
+  [type='Site of Interest'],
+  [type='Building'] {
     [zoom=14] {
       marker-width: 5;
       marker-height: 5;
@@ -170,38 +171,38 @@
     }
 
     [zoom>=15] {
+      shield-fill: #333;
+      shield-halo-fill: @land;
+      shield-halo-radius: 2;
+      shield-wrap-width: 60;
+      shield-line-spacing: -2;
+      shield-face-name: "Frutiger LT 55 Roman Regular";
+      shield-name: [name];
+      shield-file: url("images/gray_dot_5px_buffer.svg");
+      shield-unlock-image: true;
+      shield-text-dx: 7;
+      shield-min-distance: 10;
+      shield-placement-type: simple;
+      shield-placements: "E,W";
+      shield-avoid-edges: true;
+      shield-size: 11;
+
       marker-width: 5;
       marker-height: 5;
       marker-fill: #333;
       marker-line-width: 0;
-
-      text-fill: #333;
-      text-halo-fill: @land;
-      text-halo-radius: 2;
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      /*
-      text-transform: uppercase;
-      */
-      text-min-padding: 0;
-      text-min-distance: 0;
-      text-wrap-width: 48;
-      text-avoid-edges: true;
-
-      text-size: 11;
-      text-placement-type: simple;
-      text-name: [name];
-      text-dx: 7;
-      text-placements: "W,E,N,S";
     }
     
     [zoom>=16] {
-      text-size: 12;
-      text-face-name: "Frutiger LT 45 Light Bold";
+      shield-size: 12;
+      shield-face-name: "Frutiger LT 45 Light Bold";
     }
     
     [zoom>=17] {
-      text-size: 13;
-      text-wrap-width: 60;
+      shield-text-dx: 8;
+      shield-line-spacing: -1;
+      shield-size: 13;
+      shield-wrap-width: 60;
     }
   }
 
