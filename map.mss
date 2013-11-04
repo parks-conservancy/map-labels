@@ -38,9 +38,5 @@ Map {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-placement: line;
   text-avoid-edges: true;
-}
-
-#dual-carriageways {
-  line-width: 1;
-  line-color: #fc0;
+  text-min-distance: 150;
 }

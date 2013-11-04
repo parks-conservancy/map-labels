@@ -59,6 +59,8 @@
   text-name: "''";
   text-face-name: "Frutiger LT 55 Roman Regular";
   text-placement: line;
+  text-min-distance: 400;
+  text-avoid-edges: true;
 
   //
   // separated highways
