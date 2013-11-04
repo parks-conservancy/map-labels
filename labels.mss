@@ -6,7 +6,6 @@
   text-opacity: 0.9;
   text-size: 9;
   text-min-distance: 10;
-  text-min-padding: 25;
   text-wrap-width: 32;
   text-avoid-edges: true;
   text-align: center;
@@ -180,7 +179,7 @@
   // text-spacing: 0;
   text-label-position-tolerance: 5;
   text-min-distance: 15;
-  text-min-padding: 15;
+  text-avoid-edges: true;
   text-wrap-width: 24;
   text-halo-radius: 1.5;
   text-character-spacing: 2;
@@ -271,7 +270,7 @@
   // text-character-spacing: 1;
   text-label-position-tolerance: 5;
   text-min-distance: 15;
-  text-min-padding: 15;
+  text-avoid-edges: true;
   text-wrap-width: 42;
   text-halo-radius: 1.5;
   text-halo-fill: @water;
