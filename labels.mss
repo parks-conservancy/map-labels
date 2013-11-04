@@ -283,39 +283,3 @@
     text-size: 15;
   }
 }
-
-#water-labels[areasqkm>1],
-{
-  text-face-name: "Roboto Italic";
-  text-name: [name];
-  text-fill: #00a6da;
-  text-size: 10;
-  text-placement: interior;
-  // text-spacing: 0;
-  // text-character-spacing: 1;
-  text-label-position-tolerance: 5;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 24;
-  text-halo-radius: 1;
-  text-halo-fill: @water;
-}
-
-#cpad-labels
-{
-  text-face-name: "Roboto Regular";
-  text-name: [name];
-  text-fill: #169d50;
-  text-opacity: 1;
-  text-size: 11;
-  text-placement: interior;
-  // text-spacing: 0;
-  // text-character-spacing: 1;
-  text-label-position-tolerance: 5;
-  text-min-distance: 50;
-  text-min-padding: 50;
-  text-wrap-width: 24;
-  /*
-  text-halo-radius: 1;
-  */
-}
