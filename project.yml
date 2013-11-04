@@ -94,6 +94,73 @@ Layer:
   #       WHERE zoom(!scale_denominator!) >= 15
   #       ) AS _
 
+  # ---- Places --------------------------------------------------------
+
+  - <<: *layer
+    name: places_z12minus
+    id:   places_z12minus
+    class: places
+    status: on
+    properties:
+      maxzoom: 12
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT *
+          FROM
+          (
+            SELECT DISTINCT ON (name) name, way, place, population,
+                   priority, size
+            FROM
+            (
+              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
+                     way,
+                     tags -> 'place' AS place,
+                     COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+                     CASE
+                      WHEN tags -> 'place' IN ('city') THEN 1
+                      WHEN tags -> 'place' IN ('suburb') THEN 2
+                      WHEN tags -> 'place' IN ('town') THEN 3
+                      WHEN tags -> 'place' IN ('neighbourhood') THEN 4
+                      WHEN tags -> 'place' IN ('village') THEN 5
+                      ELSE 10
+                    END AS priority,
+                    1 as size
+              FROM planet_osm_point
+              WHERE way && !bbox!
+                AND tags ?& ARRAY['name', 'place']
+                AND tags -> 'place' IN ('city', 'town')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                AND tags -> 'name' NOT IN ('Doelger City')
+                AND NOT tags ? 'historic'
+            UNION
+              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
+                     way,
+                     tags -> 'place' AS place,
+                     way_area size,
+              COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+              CASE
+                WHEN tags->'place' IN ('city') THEN 1
+                WHEN tags->'place' IN ('suburb') THEN 2
+                WHEN tags->'place' IN('town') THEN 3
+                WHEN tags->'place' IN ('neighbourhood') THEN 4
+                WHEN tags->'place' IN ('village') THEN 5
+                ELSE 10
+              END AS priority
+              FROM planet_osm_polygon
+              WHERE way && !bbox!
+                AND tags ?& ARRAY['name', 'place']
+                AND tags -> 'place' IN ('city','town','village')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
+            ) AS stuff
+            ORDER BY name
+          ) AS stuff
+          ORDER BY priority ASC, population DESC, size DESC
+        ) AS places
+
   # ---- GGNRA Unit Names ----------------------------------------------
 
   - <<: *layer
@@ -306,71 +373,6 @@ Layer:
   #       ) AS _
 
   # ---- Places --------------------------------------------------------
-
-  - <<: *layer
-    name: places_z12minus
-    id:   places_z12minus
-    class: places
-    status: on
-    properties:
-      maxzoom: 12
-    Datasource:
-      <<: *postgis
-      table: >
-        (
-          SELECT *
-          FROM 
-          (
-            SELECT DISTINCT ON (name) name, way, place, population,
-                   priority, size
-            FROM
-            (
-              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
-                     way,
-                     tags -> 'place' AS place,
-                     COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
-                     CASE
-                      WHEN tags -> 'place' IN ('city') THEN 1
-                      WHEN tags -> 'place' IN ('suburb') THEN 2
-                      WHEN tags -> 'place' IN ('town') THEN 3
-                      WHEN tags -> 'place' IN ('neighbourhood') THEN 4
-                      WHEN tags -> 'place' IN ('village') THEN 5
-                      ELSE 10
-                    END AS priority,
-                    1 as size
-              FROM planet_osm_point
-              WHERE way && !bbox!
-                AND tags ?& ARRAY['name', 'place']
-                AND tags -> 'place' IN ('city', 'town')
-                AND tags -> 'name' NOT LIKE '%Home%'
-                AND tags -> 'name' NOT LIKE '%Trailer Court%'
-                AND tags -> 'name' NOT IN ('Doelger City')
-                AND NOT tags ? 'historic'
-            UNION
-              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
-                     way,
-                     tags -> 'place' AS place,
-                     way_area size,
-              COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
-              CASE
-                WHEN tags->'place' IN ('city') THEN 1
-                WHEN tags->'place' IN ('suburb') THEN 2
-                WHEN tags->'place' IN('town') THEN 3
-                WHEN tags->'place' IN ('neighbourhood') THEN 4
-                WHEN tags->'place' IN ('village') THEN 5
-                ELSE 10
-              END AS priority
-              FROM planet_osm_polygon
-              WHERE way && !bbox!
-                AND tags ?& ARRAY['name', 'place']
-                AND tags -> 'place' IN ('city','town','village')
-                AND tags -> 'name' NOT LIKE '%Home%'
-                AND tags -> 'name' NOT LIKE '%Trailer Court%'
-            ) AS stuff
-            ORDER BY name
-          ) AS stuff
-          ORDER BY priority ASC, population DESC, size DESC
-        ) AS places
 
   - <<: *layer
     name: places_z13plus
