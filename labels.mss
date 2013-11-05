@@ -30,8 +30,8 @@
     text-placements: "W";
   }
 
-  [label_hint="X"] {
-    text-placements: "X";
+  [label_hint="E"] {
+    text-placements: "E";
   }
 
   [zoom>=11] {
