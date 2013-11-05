@@ -181,6 +181,7 @@
       shield-placement-type: simple;
       shield-placements: "E,W";
       shield-avoid-edges: true;
+      shield-min-padding: 2;
       shield-size: 11;
 
       marker-width: 5;
