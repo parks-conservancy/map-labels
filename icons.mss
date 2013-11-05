@@ -43,7 +43,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 2;
       shield-text-dx: 0.1;
-      shield-text-dy: -28;
+      shield-text-dy: -14;
       shield-wrap-width: 32;
       shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
