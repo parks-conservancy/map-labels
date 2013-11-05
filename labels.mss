@@ -11,12 +11,28 @@
 
   text-placement-type: simple;
   text-placements: "X,S,W,N,E,SW,NE,SE,NE";
-  //[label_hint="N"] { text-placements: "N,NW,NE,X,S,W,E,SW,SE"; }
-  [label_hint="N"] { text-placements: "N"; }
-  [label_hint="NW"] { text-placements: "NW,N,W"; }
-  [label_hint="W"] { text-placements: "W"; }
   text-dx: 5;
   text-dy: 5;
+
+  [label_hint="N"] {
+    text-placements: "N";
+  }
+
+  [label_hint="NW"] {
+    text-placements: "NW,N,W";
+  }
+
+  [label_hint="SW"] {
+    text-placements: "SW";
+  }
+
+  [label_hint="W"] {
+    text-placements: "W";
+  }
+
+  [label_hint="X"] {
+    text-placements: "X";
+  }
 
   [zoom>=11] {
     text-min-distance: 30;
