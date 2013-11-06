@@ -161,73 +161,14 @@ Layer:
           ORDER BY priority ASC, population DESC, size DESC
         ) AS places
 
-  # ---- GGNRA Unit Names ----------------------------------------------
-
-  - <<: *layer
-    name: unit_labels
-    id:   unit_labels
-    status: on
-    properties:
-      minzoom: 11
-    Datasource:
-      <<: *postgis
-      geometry_field: geom
-      table: >
-        (
-          SELECT name, geom, label_hint
-          FROM locations
-          WHERE geom && !bbox!
-            AND type='Park'
-        ) AS _
-
-  # ---- Recreational Opportunities (OSM) ------------------------------
-
-  # - <<: *layer
-  #   name: sports
-  #   id:   sports
-  #   status: off
-  #   Datasource:
-  #     <<: *postgis
-  #     table: >
-  #       (
-  #         SELECT * FROM (
-  #           SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
-  #           FROM planet_osm_point
-  #           WHERE way && !bbox!
-  #             AND tags ?| ARRAY['sport', 'leisure']
-  #             AND (
-  #               string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-  #                                                              'kiteboarding',
-  #                                                              'windsurfing',
-  #                                                              'paddleboarding'
-  #                                                              'free_flying']
-  #               OR
-  #               string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-  #         UNION
-  #           SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
-  #           FROM planet_osm_polygon
-  #           WHERE way && !bbox!
-  #             AND tags ?| ARRAY['sport', 'leisure']
-  #             AND (
-  #               string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-  #                                                              'kiteboarding',
-  #                                                              'windsurfing',
-  #                                                              'paddleboarding'
-  #                                                              'free_flying']
-  #               OR
-  #               string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-  #         ) AS x
-  #       ) AS x
-
   # ---- GGNPC Locations -----------------------------------------------
-  # note: ogc_fid may not be unique when unioned with other tables
 
   - <<: *layer
     name: locations
     id:   locations
     status: on
     properties:
-      minzoom: 14
+      minzoom: 11
     Datasource:
       <<: *postgis
       key_field: id
@@ -242,7 +183,23 @@ Layer:
               type,
               geom,
               filename,
+              NULL AS orientation,
+              label_hint,
+              0 AS priority,
+              ST_Transform(geom, 4326) geom_4326
+            FROM locations
+            WHERE geom && !bbox!
+              AND type='Park'
+          UNION
+            SELECT ogc_fid id,
+              ogc_fid _id,
+              name,
+              NULL AS description,
+              type,
+              geom,
+              filename,
               orientation,
+              NULL AS label_hint,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -264,8 +221,8 @@ Layer:
               END) AS priority,
               ST_Transform(geom, 4326) geom_4326
             FROM locations
-            WHERE geom && !bbox!
-              AND type NOT IN ('Park')
+            WHERE zoom(!scale_denominator!) >= 14
+              AND geom && !bbox!
               AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Building')
           UNION
             SELECT ogc_fid << 4 id,
@@ -275,11 +232,13 @@ Layer:
               type,
               geom,
               filename,
-              NULL as orientation,
+              NULL AS orientation,
+              NULL AS label_hint,
               10 AS priority,
               ST_Transform(geom, 4326) geom_4326
             FROM ggnra_restrooms
-            WHERE geom && !bbox!
+            WHERE zoom(!scale_denominator!) >= 14
+              AND geom && !bbox!
               AND type = 'Restroom'
           UNION
             SELECT id::integer << 8 id,
@@ -289,11 +248,13 @@ Layer:
               'Trailhead' AS type,
               ST_Transform(geom, 900913) geom,
               NULL AS filename,
-              NULL as orientation,
+              NULL AS orientation,
+              NULL AS label_hint,
               3 AS priority,
               ST_Transform(geom, 4326) geom_4326
             FROM trailheads
-            WHERE ST_Transform(geom, 900913) && !bbox!
+            WHERE zoom(!scale_denominator!) >= 14
+              AND ST_Transform(geom, 900913) && !bbox!
           ) AS _
           ORDER BY priority, id
         ) AS x

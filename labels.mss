@@ -1,4 +1,4 @@
-#unit_labels
+#locations[type='Park']
 {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
