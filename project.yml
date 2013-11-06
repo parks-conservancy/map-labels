@@ -284,8 +284,8 @@ Layer:
           UNION
             SELECT id::integer << 8 id,
               id _id,
-              properties->'name' AS name,
-              properties->'description' AS description,
+              properties->>'name' AS name,
+              properties->>'description' AS description,
               'Trailhead' AS type,
               ST_Transform(geom, 900913) geom,
               NULL AS filename,
