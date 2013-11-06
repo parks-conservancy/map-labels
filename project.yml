@@ -293,7 +293,7 @@ Layer:
               3 AS priority,
               ST_Transform(geom, 4326) geom_4326
             FROM trailheads
-            WHERE geom && !bbox!
+            WHERE ST_Transform(geom, 900913) && !bbox!
           ) AS _
           ORDER BY priority, id
         ) AS x
