@@ -94,81 +94,13 @@ Layer:
   #       WHERE zoom(!scale_denominator!) >= 15
   #       ) AS _
 
-  # ---- Places --------------------------------------------------------
-
-  - <<: *layer
-    name: places_z12minus
-    id:   places_z12minus
-    class: places
-    status: on
-    properties:
-      maxzoom: 12
-    Datasource:
-      <<: *postgis
-      table: >
-        (
-          SELECT *
-          FROM
-          (
-            SELECT DISTINCT ON (name) name, way, place, population,
-                   priority, size
-            FROM
-            (
-              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
-                     way,
-                     tags -> 'place' AS place,
-                     COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
-                     CASE
-                      WHEN tags -> 'place' IN ('city') THEN 1
-                      WHEN tags -> 'place' IN ('suburb') THEN 2
-                      WHEN tags -> 'place' IN ('town') THEN 3
-                      WHEN tags -> 'place' IN ('neighbourhood') THEN 4
-                      WHEN tags -> 'place' IN ('village') THEN 5
-                      ELSE 10
-                    END AS priority,
-                    1 as size
-              FROM planet_osm_point
-              WHERE way && !bbox!
-                AND tags ?& ARRAY['name', 'place']
-                AND tags -> 'place' IN ('city', 'town')
-                AND tags -> 'name' NOT LIKE '%Home%'
-                AND tags -> 'name' NOT LIKE '%Trailer Court%'
-                AND tags -> 'name' NOT IN ('Doelger City')
-                AND NOT tags ? 'historic'
-            UNION
-              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
-                     way,
-                     tags -> 'place' AS place,
-                     way_area size,
-              COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
-              CASE
-                WHEN tags->'place' IN ('city') THEN 1
-                WHEN tags->'place' IN ('suburb') THEN 2
-                WHEN tags->'place' IN('town') THEN 3
-                WHEN tags->'place' IN ('neighbourhood') THEN 4
-                WHEN tags->'place' IN ('village') THEN 5
-                ELSE 10
-              END AS priority
-              FROM planet_osm_polygon
-              WHERE way && !bbox!
-                AND tags ?& ARRAY['name', 'place']
-                AND tags -> 'place' IN ('city','town','village')
-                AND tags -> 'name' NOT LIKE '%Home%'
-                AND tags -> 'name' NOT LIKE '%Trailer Court%'
-            ) AS stuff
-            ORDER BY name
-          ) AS stuff
-          ORDER BY priority ASC, population DESC, size DESC
-        ) AS places
-
-  # ---- GGNPC Locations -----------------------------------------------
+  # ---- Things that need to show up in UTFGrids -----------------------
 
   - <<: *layer
     name: locations
     id:   locations
+    class: places
     status: on
-    properties:
-      minzoom: 11
     Datasource:
       <<: *postgis
       key_field: id
@@ -176,30 +108,102 @@ Layer:
       table: >
         (
           SELECT *, ST_X(geom_4326) lng, ST_Y(geom_4326) lat FROM (
+            SELECT * FROM (
+              SELECT osm_id id,
+                osm_id _id,
+                name,
+                ''::text AS description,
+                'place'::varchar AS type,
+                place,
+                population,
+                ''::varchar AS filename,
+                0 AS orientation,
+                ''::varchar AS label_hint,
+                0 AS priority,
+                way geom,
+                ST_Transform(ST_Centroid(way), 4326) geom_4326
+              FROM
+              (
+                SELECT DISTINCT ON (name) name, osm_id, way, place, population,
+                      priority, size
+                FROM
+                (
+                  SELECT osm_id, (string_to_array(tags -> 'name', ';'))[1] AS name,
+                        way,
+                        tags -> 'place' AS place,
+                        COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+                        CASE
+                          WHEN tags -> 'place' IN ('city') THEN 1
+                          WHEN tags -> 'place' IN ('suburb') THEN 2
+                          WHEN tags -> 'place' IN ('town') THEN 3
+                          WHEN tags -> 'place' IN ('neighbourhood') THEN 4
+                          WHEN tags -> 'place' IN ('village') THEN 5
+                          ELSE 10
+                        END AS priority,
+                        1 as size
+                  FROM planet_osm_point
+                  WHERE way && !bbox!
+                    AND tags ?& ARRAY['name', 'place']
+                    AND tags -> 'place' IN ('city', 'town')
+                    AND tags -> 'name' NOT LIKE '%Home%'
+                    AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                    AND tags -> 'name' NOT IN ('Doelger City')
+                    AND NOT tags ? 'historic'
+                UNION
+                  SELECT osm_id, (string_to_array(tags -> 'name', ';'))[1] AS name,
+                        way,
+                        tags -> 'place' AS place,
+                        way_area size,
+                  COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+                  CASE
+                    WHEN tags->'place' IN ('city') THEN 1
+                    WHEN tags->'place' IN ('suburb') THEN 2
+                    WHEN tags->'place' IN('town') THEN 3
+                    WHEN tags->'place' IN ('neighbourhood') THEN 4
+                    WHEN tags->'place' IN ('village') THEN 5
+                    ELSE 10
+                  END AS priority
+                  FROM planet_osm_polygon
+                  WHERE way && !bbox!
+                    AND tags ?& ARRAY['name', 'place']
+                    AND tags -> 'place' IN ('city','town','village')
+                    AND tags -> 'name' NOT LIKE '%Home%'
+                    AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                ) AS _
+                ORDER BY name
+              ) AS _
+              WHERE zoom(!scale_denominator!) <= 12
+              ORDER BY priority ASC, population DESC, size DESC
+            ) AS _
+          UNION
             SELECT ogc_fid id,
               ogc_fid _id,
               name,
-              NULL AS description,
+              '' AS description,
               type,
-              geom,
+              '' AS place,
+              0 AS population,
               filename,
-              NULL AS orientation,
+              0 AS orientation,
               label_hint,
-              0 AS priority,
+              1 AS priority,
+              geom,
               ST_Transform(geom, 4326) geom_4326
             FROM locations
-            WHERE geom && !bbox!
+            WHERE zoom(!scale_denominator!) >= 11
+              AND geom && !bbox!
               AND type='Park'
           UNION
             SELECT ogc_fid id,
               ogc_fid _id,
               name,
-              NULL AS description,
+              '' AS description,
               type,
-              geom,
+              '' AS place,
+              0 AS population,
               filename,
               orientation,
-              NULL AS label_hint,
+              '' AS label_hint,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
@@ -219,6 +223,7 @@ Layer:
               WHEN type = 'Bike Rack' THEN 16
               ELSE 100
               END) AS priority,
+              geom,
               ST_Transform(geom, 4326) geom_4326
             FROM locations
             WHERE zoom(!scale_denominator!) >= 14
@@ -226,15 +231,17 @@ Layer:
               AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Building')
           UNION
             SELECT ogc_fid << 4 id,
-              ogc_fid _id,
-              name,
-              NULL AS description,
-              type,
-              geom,
+              ogc_fid AS _id,
+              '' AS name,
+              '' AS description,
+              'Restroom' AS type,
+              '' AS place,
+              0 AS population,
               filename,
-              NULL AS orientation,
-              NULL AS label_hint,
+              0 AS orientation,
+              '' AS label_hint,
               10 AS priority,
+              geom,
               ST_Transform(geom, 4326) geom_4326
             FROM ggnra_restrooms
             WHERE zoom(!scale_denominator!) >= 14
@@ -242,15 +249,17 @@ Layer:
               AND type = 'Restroom'
           UNION
             SELECT id::integer << 8 id,
-              id _id,
+              id::integer _id,
               properties->>'name' AS name,
               properties->>'description' AS description,
               'Trailhead' AS type,
-              ST_Transform(geom, 900913) geom,
-              NULL AS filename,
-              NULL AS orientation,
-              NULL AS label_hint,
+              '' AS place,
+              0 AS population,
+              '' AS filename,
+              0 AS orientation,
+              '' AS label_hint,
               3 AS priority,
+              ST_Transform(geom, 900913) geom,
               ST_Transform(geom, 4326) geom_4326
             FROM trailheads
             WHERE zoom(!scale_denominator!) >= 14
@@ -346,7 +355,7 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT *
+          SELECT *, 'place' AS type
           FROM 
           (
             SELECT DISTINCT ON (name) name, way, place, population,

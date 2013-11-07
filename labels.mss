@@ -185,7 +185,7 @@
   }
 }
 
-.places
+.places[type='place']
 {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
@@ -201,72 +201,72 @@
   text-character-spacing: 2;
 
   text-transform: uppercase;
-}
 
-// seem right for zoom 12
-.places[place='city']
-{
-  text-wrap-width: 32;
-  text-size: 15;
-  text-fill: #262626;
-  text-character-spacing: 2;
-  text-halo-radius: 1.5;
-  
-  [population>200000]
+  // seem right for zoom 12
+  .places[place='city']
   {
-    text-face-name: "Frutiger LT 55 Roman Bold";
-    text-size: 18;
-    text-character-spacing: 3;
+    text-wrap-width: 32;
+    text-size: 15;
+    text-fill: #262626;
+    text-character-spacing: 2;
+    text-halo-radius: 1.5;
+    
+    [population>200000]
+    {
+      text-face-name: "Frutiger LT 55 Roman Bold";
+      text-size: 18;
+      text-character-spacing: 3;
+    }
   }
-}
 
-.places[place='town']
-{
-  text-halo-radius: 1.5;
-  text-character-spacing: 2;
-  text-wrap-width: 32;
-  text-size: 12;
-  text-fill: #262626;
-  
-  [zoom>=13] {
-    text-size: 14;
+  .places[place='town']
+  {
+    text-halo-radius: 1.5;
+    text-character-spacing: 2;
+    text-wrap-width: 32;
+    text-size: 12;
+    text-fill: #262626;
+    
+    [zoom>=13] {
+      text-size: 14;
+    }
   }
-}
 
-.places[place='suburb']
-{
-  text-character-spacing: 1;
-  text-size: 11;
-}
-
-.places[place='neighbourhood']
-{
-  text-face-name: "Frutiger LT 55 Roman Regular";
-
-  [zoom>=12] {
-    text-size: 9;
+  .places[place='suburb']
+  {
+    text-character-spacing: 1;
+    text-size: 11;
   }
-  
-  [zoom>=14] {
-    text-size: 10;
+
+  .places[place='neighbourhood']
+  {
+    text-face-name: "Frutiger LT 55 Roman Regular";
+
+    [zoom>=12] {
+      text-size: 9;
+    }
+    
+    [zoom>=14] {
+      text-size: 10;
+    }
   }
-}
 
-.places[place='village']
-{
-}
+  .places[place='village']
+  {
+  }
 
-.places[place='hamlet']
-{
-}
+  .places[place='hamlet']
+  {
+  }
 
-.places[place='locality'],
-.places[place='locale'],
-{
-}
+  .places[place='locality'],
+  .places[place='locale'],
+  {
+  }
 
-.places[place='island']
-{
+  .places[place='island']
+  {
+  }
 }
 
 #bay,
