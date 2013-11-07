@@ -2,12 +2,17 @@
 {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
-  text-fill: #000;
+  text-fill: #15984d;
   text-opacity: 0.9;
-  text-size: 9;
+  text-size: 11;
+  text-min-distance: 30;
+  text-character-spacing: 1;
+  text-halo-fill: @land;
+  text-halo-radius: 1;
   text-wrap-width: 32;
   text-avoid-edges: true;
   text-align: center;
+  text-transform: uppercase;
 
   text-placement-type: simple;
   text-placements: "X,S,W,N,E,SW,NE,SE,NE";
@@ -32,17 +37,6 @@
 
   [label_hint="E"] {
     text-placements: "E";
-  }
-
-  [zoom>=11] {
-    text-min-distance: 30;
-    text-wrap-width: 32;
-    text-size: 11;
-    text-character-spacing: 1;
-    text-halo-fill: @land;
-    text-halo-radius: 1;
-    text-fill: #15984d;
-    text-transform: uppercase;
   }
 
   [zoom>=12] {
