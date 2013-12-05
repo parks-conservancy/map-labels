@@ -179,7 +179,7 @@ Layer:
             SELECT ogc_fid id,
               ogc_fid _id,
               name,
-              '' AS description,
+              descriptio description,
               type,
               '' AS place,
               0 AS population,
@@ -197,12 +197,12 @@ Layer:
             SELECT ogc_fid id,
               ogc_fid _id,
               name,
-              '' AS description,
+              descriptio AS description,
               type,
               '' AS place,
               0 AS population,
               filename,
-              orientation,
+              orientatio orientation,
               '' AS label_hint,
               (CASE
               WHEN type = 'Park' THEN 1
@@ -228,27 +228,9 @@ Layer:
             FROM locations
             WHERE zoom(!scale_denominator!) >= 14
               AND geom && !bbox!
-              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Building')
+              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Building', 'Restroom')
           UNION
-            SELECT ogc_fid << 4 id,
-              ogc_fid AS _id,
-              '' AS name,
-              '' AS description,
-              'Restroom' AS type,
-              '' AS place,
-              0 AS population,
-              filename,
-              0 AS orientation,
-              '' AS label_hint,
-              10 AS priority,
-              geom,
-              ST_Transform(geom, 4326) geom_4326
-            FROM ggnra_restrooms
-            WHERE zoom(!scale_denominator!) >= 14
-              AND geom && !bbox!
-              AND type = 'Restroom'
-          UNION
-            SELECT id::integer << 8 id,
+            SELECT id::integer << 4 id,
               id::integer _id,
               properties->>'name' AS name,
               properties->>'description' AS description,
@@ -281,11 +263,10 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT DISTINCT ON (snapped) snapped, geom FROM (
-            SELECT geom, ST_SnapToGrid(geom, !pixel_width! * 96, !pixel_height! * 96) snapped
-            FROM parking_lots
-            WHERE geom && ST_Expand(!bbox!, -1 * !pixel_width! * 36) -- shrink the bbox by the buffer size (approximately)
-          ) AS _
+          SELECT geom
+          FROM locations
+          WHERE geom && !bbox!
+            AND type='Parking Lot'
         ) AS _
 
   # ---- Trail Labels --------------------------------------------------
